@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestação de Serviço</title>
+    <style>
+        /* --- ESTILOS GERAIS E RESET --- */
+        /* Isso prepara o terreno, removendo margens padrão */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif; /* Adicionar uma fonte padrão é uma boa prática */
+        }
+
+        img {
+            max-width: 100%; /* Truque de ouro: impede que imagens fiquem maiores que seus containers */
+            height: auto;
+            display: block; /* Remove espaços extras abaixo da imagem */
+        }
+
+        /* --- CABEÇALHO (HERO SECTION) --- */
+        .hero-header {
+            background: url(eletricista1.png) no-repeat center center;
+            background-size: cover; /* Faz a imagem cobrir toda a área, sem distorcer */
+            height: 90vh; /* Usa a altura da tela (viewport height) para ser mais flexível */
+            display: flex; /* Usando flexbox para centralizar o texto */
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-header .titulo-principal {
+            font-size: clamp(2.5rem, 8vw, 5rem); /* Fonte fluida: tamanho mínimo, preferido e máximo */
+            color: blue;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para melhorar a leitura */
+        }
+
+        .hero-header .titulo-principal .destaque-branco {
+            color: white;
+        }
+
+        /* --- BARRA DE ORÇAMENTO --- */
+        .barra-orcamento {
+            background-color: #222121;
+            padding: 15px 0;
+        }
+        
+        .barra-orcamento .botao-orcamento {
+            list-style-type: none;
+            width: 90%;
+            max-width: 300px; /* Largura máxima, mas pode encolher */
+            margin: 0 auto;
+            background-color: #e80505;
+            border-radius: 8px; /* Bordas arredondadas para um visual mais moderno */
+        }
+
+        .barra-orcamento .botao-orcamento a {
+            display: block;
+            color: white; /* Cor do texto alterada para melhor contraste */
+            padding: 12px 16px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* --- CONTAINER PRINCIPAL (LAYOUT DE DUAS COLUNAS) --- */
+        .container-principal {
+            display: flex; /* A MÁGICA COMEÇA AQUI! */
+            flex-wrap: wrap; /* Permite que os itens quebrem para a linha de baixo em telas pequenas */
+            padding: 20px;
+            gap: 20px; /* Espaço entre as colunas */
+        }
+
+        .conteudo-texto {
+            flex: 2; /* Ocupa 2 partes do espaço (mais ou menos 66%) */
+            min-width: 300px; /* Largura mínima para não espremer demais o texto */
+        }
+        
+        .conteudo-imagens {
+            flex: 1; /* Ocupa 1 parte do espaço (mais ou menos 33%) */
+            display: flex;
+            flex-direction: column; /* Organiza as imagens em uma coluna */
+            gap: 20px; /* Espaço entre as imagens */
+            align-items: center;
+        }
+        
+        .conteudo-texto .subtitulo {
+            font-size: clamp(2rem, 6vw, 3rem); /* Fonte fluida */
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .conteudo-texto p {
+            line-height: 1.6; /* Melhora a legibilidade */
+            margin-bottom: 20px;
+        }
+
+        /* --- SEÇÃO DE SERVIÇOS (QUALIDADE) --- */
+        .secao-qualidade {
+            background-color: #000;
+            color: aliceblue;
+            display: flex; /* Flexbox de novo! */
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite quebrar a linha */
+            padding: 40px 20px;
+            gap: 20px;
+        }
+
+        .secao-qualidade h1 {
+            text-align: center;
+        }
+        
+        /* --- SEÇÃO DE CARDS DE SERVIÇOS --- */
+        .secao-cards-servicos {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .container-cards {
+            display: flex; /* Flexbox para os cards! */
+            justify-content: center;
+            flex-wrap: wrap; /* Essencial para a responsividade */
+            gap: 20px; /* Espaçamento moderno */
+            margin-top: 20px;
+        }
+
+        .card-servico {
+            background-color: #e88a0b;
+            border-radius: 10px;
+            width: 220px;
+            height: 250px;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- SEÇÃO DE CLIENTES --- */
+        .secao-clientes {
+            padding: 40px 20px;
+        }
+
+        .titulo-secao {
+            background-color: #222121;
+            color: white;
+            padding: 10px 20px;
+            margin-bottom: 40px;
+        }
+
+        .container-logos {
+            display: flex;
+            justify-content: space-around; /* Distribui os logos com espaço entre eles */
+            align-items: center;
+            flex-wrap: wrap; /* Permite que os logos quebrem a linha */
+            gap: 30px; /* Espaçamento */
+        }
+
+        /* --- SEÇÃO DE CONTATO --- */
+        .secao-contato {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            align-items: center;
+        }
+        
+        .formulario-contato {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .imagem-contato {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+        }
+
+        .formulario-contato table {
+            width: 100%; /* Faz a tabela ocupar todo o espaço do container */
+        }
+
+        .formulario-contato th {
+            text-align: left;
+            padding: 10px 0;
+        }
+        
+        .formulario-contato td {
+            padding: 10px 0;
+        }
+        
+        .formulario-contato input[type="text"],
+        .formulario-contato input[type="email"],
+        .formulario-contato input[type="tel"],
+        .formulario-contato textarea {
+            width: 100%; /* Faz os campos ocuparem 100% da célula */
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        
+        .formulario-contato input[type=submit] {
+            background-color:#f3ac13;
+            color:white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* --- RODAPÉ --- */
+        .rodape {
+            background-color: #222121;
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .rodape-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .rodape-info {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Espaço entre o ícone e o texto */
+        }
+    </style>
+</head>
+
+<body>
+    <header class="hero-header">
+        <h1 class="titulo-principal">Contrate um profissional <br>qualificado para não perde dinheiro e tempo</span></h1>
+    </header>
+
+    <main>
+        <div class="barra-orcamento">
+            <ul class="botao-orcamento">
+                <li><a href="">ORÇAMENTOS</a></li>
+            </ul>
+        </div>
+
+        <section class="container-principal">
+            <div class="conteudo-texto">
+                <h2 class="subtitulo">Sua família pode correr<br> risco de vida com uma <br>instalação mal feita ou <br>até com instalações <br>antigas</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cupiditate magni delectus voluptates quos! Voluptatem, praesentium deleniti. Vitae distinctio, hic laboriosam perspiciatis minus adipisci facere fugiat quaerat modi quas explicabo deserunt ad ratione, quod ab. Quibusdam est officia ad dignissimos veritatis laborum tempora autem impedit dolorum illo earum illum reprehenderit fugit sint harum repellat, odio veniam, cumque tenetur deserunt, quae vel enim. Error, quam atque perspiciatis, voluptatum nesciunt dignissimos dolores, reprehenderit at fuga ratione pariatur sit placeat mollitia provident debitis?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident facilis in illum voluptates, corporis nulla porro optio consequatur nam fuga nobis distinctio laboriosam praesentium modi beatae quisquam maiores qui assumenda aut, consequuntur molestias tempora sunt, ipsum error? Fugit quod quos ratione laboriosam praesentium provident ea eum necessitatibus. Numquam cum id architecto, perspiciatis perferendis quibusdam rerum est? Quidem voluptatum natus omnis molestiae dicta, velit, aperiam corrupti provident quaerat voluptatibus molestias iusto esse repellat placeat possimus facilis. Rerum commodi deleniti debitis maiores asperiores, quidem iure tempora, consequatur sed odit eaque velit excepturi amet quod inventore porro. Tenetur accusamus tempora recusandae debitis nisi, impedit facilis. Placeat reprehenderit quo sint nemo, inventore error illo laboriosam! Quis error consequatur iste incidunt, dolorem voluptatum atque. Necessitatibus dolores fugit consequatur dicta iste eius vero, ipsam accusantium, accusamus minus, dolorum obcaecati aliquid perferendis adipisci magni repellat? Animi illum excepturi voluptatibus molestiae voluptates in, ratione minima aperiam voluptate eveniet?</p>
+            </div>
+            <aside class="conteudo-imagens">
+                <img src="eletrica_ruim1.jpg" alt="Exemplo de instalação elétrica ruim 1">
+                <img src="eletrica_ruim2.jpg" alt="Exemplo de instalação elétrica ruim 2">
+                <img src="eletrica_ruim3.jpg" alt="Exemplo de instalação elétrica ruim 3">
+            </aside>
+        </section>
+
+        <section class="secao-qualidade">
+            <img src="img_banner_2.png" alt="Banner de Qualidade">
+            <h1>SERVIÇOS COM QUALIDADE E<br> RESPONSABILIDADE</h1>
+        </section>
+
+        <section class="secao-cards-servicos">
+            <div class="container-cards">
+                <div class="card-servico">
+                    <h2>Projetos Elétricos</h2>
+                </div>
+                <div class="card-servico">
+                    <h2>Instalações</h2>
+                </div>
+                <div class="card-servico">
+                    <h2>Manutenção</h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao-clientes">
+            <div class="titulo-secao">
+                <h1>Clientes</h1>
+            </div>
+            <div class="container-logos">
+                <img src="ebanx.png" alt="Logo Cliente Ebanx">
+                <img src="spacex.png" alt="Logo Cliente SpaceX">
+                <img src="eletrobras.png" alt="Logo Cliente Eletrobras">
+                <img src="microsoft.png" alt="Logo Cliente Microsoft">
+                <img src="nubank.png" alt="Logo Cliente Nubank">
+            </div>
+        </section>
+
+        <section class="secao-contato">
+            <div class="formulario-contato">
+                <div class="titulo-secao">
+                    <h1>Contato</h1>
+                </div>
+                <form>
+                    <table>
+                        <tr>
+                            <th><label for="nome">Nome</label></th>
+                            <td><input type="text" id="nome" size="50"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="email">E-mail</label></th>
+                            <td><input type="email" id="email" size="50"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="fone">Fone</label></th>
+                            <td><input type="tel" id="fone" size="14" placeholder="11-98745-1665" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" required></td>
+                        </tr>
+                        <tr>
+                            <th><label for="mensagem">Mensagem:</label></th>
+                            <td><textarea id="mensagem" rows="5" cols="50"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td><input type="submit" value="Enviar"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <aside class="imagem-contato">
+                <img src="imgF.png" alt="Imagem decorativa para o formulário de contato">
+            </aside>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <div class="rodape-container">
+            <div class="rodape-info">
+                <img src="whats.png" alt="Ícone Whatsapp">
+                <span>(31) 99401-9813</span>
+            </div>
+            <div class="rodape-info">
+                <img src="mail.png" alt="Ícone E-mail">
+                <span>4144573@alunouninter.com</span>
+            </div>
+            <div class="rodape-info">
+                <img src="localiza.png" alt="Ícone Localização">
+                <span>Belo Horizonte</span>
+            </div>
+             <p>Layout desenvolvido para fins educacionais</p>
+        </div>
+    </footer>
+</body>
+
+</html>
